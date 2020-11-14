@@ -8,4 +8,4 @@ RUN dotnet publish -c Release
 
 EXPOSE 5000
 
-CMD ["dotnet", "./bin/Release/netcoreapp3.0/publish/getcategories.dll"]
+CMD ["dotnet", "./bin/Release/netcoreapp3.1/publish/getcategories.dll"]
