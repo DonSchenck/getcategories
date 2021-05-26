@@ -1,0 +1,9 @@
+FROM redhat/ubi8-minimal
+#USER 1001
+RUN mkdir getcategories
+WORKDIR /getcategories
+ADD ./bin/Release/netcoreapp3.1/rhel.8-x64/publish/. .
+
+EXPOSE 8080
+
+CMD ["./getcategories"]

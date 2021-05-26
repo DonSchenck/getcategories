@@ -26,15 +26,13 @@ namespace getcategories.Controllers
         [HttpGet]
         public IEnumerable<Category> Get()
         {
-            // TODO Get connection string from Environment Variable
+            // Get connection string from Environment Variable
             string connectionString = Environment.GetEnvironmentVariable("DBConnectionString");
-            //connectionString = "Server=tcp:netcandystore.database.windows.net,1433;Initial Catalog=CandiesDB;Persist Security Info=False;User ID=<userid>;Password=<dbpassword>;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
-            Console.WriteLine(connectionString);
             SqlConnection conn = new SqlConnection(connectionString);
 
-            // TODO Get categories from database
-            SqlCommand cmd = new SqlCommand("SELECT DISTINCT id, displayName FROM ProductCategories ORDER BY displayName;", conn);
+            // Get categories from database
+            SqlCommand cmd = new SqlCommand("SELECT DISTINCT id, displayName, isActive FROM ProductCategories ORDER BY displayName;", conn);
             conn.Open();
             SqlDataReader r = cmd.ExecuteReader();
             List<Category> c = new List<Category>();
@@ -42,10 +40,11 @@ namespace getcategories.Controllers
             {
                 c.Add(new Category{
                     Id = Convert.ToInt32(r[0]),
-                    displayName = r[1].ToString()
+                    displayName = r[1].ToString(),
+                    isActive = Convert.ToByte(r[2])
                 });
             }
-            // TODO Return List
+            // Return List
             return c;
         }
     }
