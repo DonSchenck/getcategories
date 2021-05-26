@@ -41,7 +41,7 @@ namespace getcategories.Controllers
             while (r.Read())
             {
                 c.Add(new Category{
-                    id = Convert.ToInt32(r[0]),
+                    Id = Convert.ToInt32(r[0]),
                     displayName = r[1].ToString()
                 });
             }
